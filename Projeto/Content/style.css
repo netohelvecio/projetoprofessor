@@ -28,3 +28,7 @@ input[type=checkbox] {
 .custom-select {
     width: 100px;
 }
+
+table tr:hover {
+    background-color: #D9DCDC;
+}

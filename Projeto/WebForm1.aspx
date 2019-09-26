@@ -15,7 +15,7 @@
 <body>
     <form id="form1" runat="server">
         <div class="mt-3">
-            <asp:GridView ID="GridView1" runat="server" CssClass="table table-bordered table-hover table-active font-size" AutoGenerateColumns="False" Style="width: 1400px" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Bottom">
+            <asp:GridView ID="GridView1" runat="server" CssClass="table table-bordered table-active font-size" AutoGenerateColumns="False" Style="width: 1400px" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Bottom">
                 <Columns>
 
                     <asp:BoundField DataField="categoria" HeaderText="Categoria" ItemStyle-Width="8%" HeaderStyle-CssClass="GridHeader" />
@@ -193,5 +193,6 @@
             arguments.IsValid = true;
         }
     }
+
 </script>
 
