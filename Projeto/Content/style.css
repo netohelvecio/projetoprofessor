@@ -1,0 +1,26 @@
+﻿.borda {
+    border-style: solid;
+    border-width: 1px;
+}
+
+.GridHeader {
+    text-align: center !important;
+    vertical-align: central !important;
+}
+
+.font-size {
+    font-size: 12px;
+}
+
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: middle;
+}
+
+input[type=checkbox] {
+    -ms-transform: scale(1.2); 
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2); 
+    transform: scale(1.2);
+    padding: 10px;
+}
