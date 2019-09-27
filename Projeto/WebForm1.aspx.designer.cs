@@ -40,6 +40,24 @@ namespace Projeto {
         protected global::System.Web.UI.WebControls.Button btnEnvia;
         
         /// <summary>
+        /// Controle btnExcel.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnExcel;
+        
+        /// <summary>
+        /// Controle btnPDF.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPDF;
+        
+        /// <summary>
         /// Controle Panel1.
         /// </summary>
         /// <remarks>

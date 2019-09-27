@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="Projeto.WebForm1" %>
+﻿<%@ Page Language="C#" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="Projeto.WebForm1" %>
 
 <!DOCTYPE html>
 
@@ -158,6 +158,8 @@
 
             <div class="d-flex justify-content-center">
                 <asp:Button CssClass="btn btn-primary" ID="btnEnvia" runat="server" Text="Enviar" OnClick="btnEnvia_Click" />
+                <asp:Button CssClass="btn btn-info ml-5" ID="btnExcel" runat="server" CausesValidation="false" Text="Excel" OnClick="btnExcel_Click" />
+                <asp:Button CssClass="btn btn-info ml-5" ID="btnPDF" runat="server" CausesValidation="false" Text="PDF" OnClick="btnPDF_Click"/>
             </div>
         </div>
     </form>

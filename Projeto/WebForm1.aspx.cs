@@ -5,6 +5,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.IO;
+using iTextSharp;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.html.simpleparser;
 
 namespace Projeto
 {
@@ -41,7 +46,7 @@ namespace Projeto
         }
 
         private void capturaDados()
-        {          
+        {
             foreach (GridViewRow gridView in GridView1.Rows)
             {
                 CheckBox CheckBox0 = (CheckBox)gridView.FindControl("CheckBox0"); //pub
@@ -283,6 +288,144 @@ namespace Projeto
         protected void btnEnvia_Click(object sender, EventArgs e)
         {
             capturaDados();
+        }
+
+        public override void VerifyRenderingInServerForm(Control control)
+        {
+            /* metodo para evitar o erro de runat não esta executando no server */
+        }
+
+        protected void btnExcel_Click(object sender, EventArgs e)
+        {
+            Response.Clear();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment;filename=Tabela.xls");
+            Response.ContentEncoding = System.Text.Encoding.GetEncoding("Windows-1252");
+            Response.Charset = "ISO-8859-1";
+            Response.ContentType = "application/vnd.ms-excel";
+
+            using (StringWriter sw = new StringWriter())
+            {
+                HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+                GridView1.AllowPaging = false;
+                this.getDados_();
+
+                GridView1.RenderControl(hw);
+                Response.Output.Write(sw.ToString());
+                Response.Flush();
+                Response.End();
+            }
+        }
+
+        [Obsolete]
+        protected void btnPDF_Click(object sender, EventArgs e)
+        {
+            //necessario instalar biblioteca iTextSharp
+
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-disposition", "attachment;filename=Tabela.pdf");
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+            GridView1.AllowPaging = false;
+            GridView1.HeaderRow.Style.Add("width", "5%");
+            GridView1.HeaderRow.Style.Add("font-size", "8px");
+            GridView1.Style.Add("font-size", "8px");
+            GridView1.HeaderRow.Style.Add("text-align", "center");
+
+            foreach (GridViewRow row in GridView1.Rows)
+            {
+                int i = row.DataItemIndex;
+                CheckBox CheckBox0 = (CheckBox)row.FindControl("CheckBox0"); //pub
+                if (CheckBox0.Checked)
+                {
+                    GridView1.Rows[row.DataItemIndex].Cells[5].Text = "X";
+                }
+                CheckBox CheckBox1 = (CheckBox)row.FindControl("CheckBox1"); //pub
+                if (CheckBox1.Checked)
+                {
+                    GridView1.Rows[row.DataItemIndex].Cells[6].Text = "X";
+                }
+                CheckBox CheckBox2 = (CheckBox)row.FindControl("CheckBox2"); //pub
+                if (CheckBox2.Checked)
+                {
+                    GridView1.Rows[row.DataItemIndex].Cells[7].Text = "X";
+                }
+                CheckBox CheckBox3 = (CheckBox)row.FindControl("CheckBox3"); //pub
+                if (CheckBox3.Checked)
+                {
+                    GridView1.Rows[row.DataItemIndex].Cells[8].Text = "X";
+                }
+                CheckBox CheckBox4 = (CheckBox)row.FindControl("CheckBox4"); //pub
+                if (CheckBox4.Checked)
+                {
+                    GridView1.Rows[row.DataItemIndex].Cells[9].Text = "X";
+                }
+                CheckBox CheckBox5 = (CheckBox)row.FindControl("CheckBox5"); //pub
+                if (CheckBox5.Checked)
+                {
+                    GridView1.Rows[row.DataItemIndex].Cells[10].Text = "X";
+                }
+                CheckBox CheckBox6 = (CheckBox)row.FindControl("CheckBox6"); //pub
+                if (CheckBox6.Checked)
+                {
+                    GridView1.Rows[row.DataItemIndex].Cells[11].Text = "X";
+                }
+                CheckBox CheckBox7 = (CheckBox)row.FindControl("CheckBox7"); //pub
+                if (CheckBox7.Checked)
+                {
+                    GridView1.Rows[row.DataItemIndex].Cells[12].Text = "X";
+                }
+                CheckBox CheckBox8 = (CheckBox)row.FindControl("CheckBox8"); //pub
+                if (CheckBox8.Checked)
+                {
+                    GridView1.Rows[row.DataItemIndex].Cells[13].Text = "X";
+                }
+                CheckBox CheckBox9 = (CheckBox)row.FindControl("CheckBox9"); //pub
+                if (CheckBox9.Checked)
+                {
+                    GridView1.Rows[row.DataItemIndex].Cells[14].Text = "X";
+                }
+                CheckBox CheckBox10 = (CheckBox)row.FindControl("CheckBox10"); //pub
+                if (CheckBox10.Checked)
+                {
+                    GridView1.Rows[row.DataItemIndex].Cells[15].Text = "X";
+                }
+                CheckBox CheckBox11 = (CheckBox)row.FindControl("CheckBox11"); //pub
+                if (CheckBox11.Checked)
+                {
+                    GridView1.Rows[row.DataItemIndex].Cells[16].Text = "X";
+                }
+                CheckBox CheckBox12 = (CheckBox)row.FindControl("CheckBox12"); //pub
+                if (CheckBox12.Checked)
+                {
+                    GridView1.Rows[row.DataItemIndex].Cells[17].Text = "X";
+                }
+            }
+
+            for (int i = 0; i <= 17; i++)
+            {
+                GridView1.Columns[i].ItemStyle.HorizontalAlign = HorizontalAlign.Center;
+                GridView1.Columns[i].ItemStyle.VerticalAlign = VerticalAlign.Middle;
+            }
+
+            GridView1.RenderControl(hw);
+
+            StringReader sr = new StringReader(sw.ToString());
+            Document document = new Document(new RectangleReadOnly(900, 600), 30f, 30f, 10f, 10f);
+            document.SetMargins(5, 5, 10, 10);
+            document.AddCreationDate();
+            HTMLWorker htmlparser = new HTMLWorker(document);
+            PdfWriter.GetInstance(document, Response.OutputStream);
+
+            document.Open();
+            htmlparser.Parse(sr);
+            document.Close();
+
+            Response.Write(document);
+            Response.End();
         }
     }
 }
