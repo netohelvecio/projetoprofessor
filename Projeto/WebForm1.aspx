@@ -15,142 +15,108 @@
 <body>
     <form id="form1" runat="server">
         <div class="mt-3">
-            <asp:GridView ID="GridView1" runat="server" CssClass="table table-bordered table-active font-size" AutoGenerateColumns="False" Style="width: 1400px" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Bottom">
+            <asp:GridView ID="GridView1" runat="server" CssClass="table table-bordered table-active font-size" AutoGenerateColumns="False" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Bottom">
                 <Columns>
 
                     <asp:BoundField DataField="categoria" HeaderText="Categoria" ItemStyle-Width="8%" HeaderStyle-CssClass="GridHeader" />
 
 
-                    <asp:TemplateField HeaderText="Informar CC? Fixo/não Fixo" ItemStyle-Width="10%" HeaderStyle-CssClass="GridHeader">
+                    <asp:TemplateField HeaderText="Informar CC? Fixo/não Fixo" ItemStyle-Width="6%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:DropDownList ID="DropDownList1" CssClass="browser-default custom-select" runat="server">
-                                <asp:ListItem Text="Selecione..." Value="0" Selected="True" />
-                                <asp:ListItem Text="Não" Value="1" />
-                                <asp:ListItem Text="Sim" Value="2" />
-                            </asp:DropDownList>
-
-                            <asp:CustomValidator ID="CustomValidator1"
-                                ControlToValidate="DropDownList1"
-                                ClientValidationFunction="ValidaCC"
-                                ErrorMessage="Preencha os campos!"
-                                CssClass="m-0 p-0"
-                                ForeColor="red"
-                                Font-Size="12px"
-                                runat="server" />
+                            <asp:Label ID="LabelCC" runat="server" Text="Não"></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:TemplateField HeaderText="QTDE" ItemStyle-Width="10%" HeaderStyle-CssClass="GridHeader">
+                    <asp:TemplateField HeaderText="QTDE" ItemStyle-Width="4%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:DropDownList ID="DropDownList2" CssClass="browser-default custom-select" runat="server">
-                                <asp:ListItem Text="Selecione..." Value="11" Selected="True" />
-                                <asp:ListItem Text="0" Value="0" />
-                                <asp:ListItem Text="1" Value="1" />
-                                <asp:ListItem Text="2" Value="2" />
-                                <asp:ListItem Text="3" Value="3" />
-                                <asp:ListItem Text="4" Value="4" />
-                                <asp:ListItem Text="5" Value="5" />
-                                <asp:ListItem Text="6" Value="6" />
-                                <asp:ListItem Text="7" Value="7" />
-                                <asp:ListItem Text="8" Value="8" />
-                                <asp:ListItem Text="9" Value="9" />
-                                <asp:ListItem Text="10" Value="10" />
-                            </asp:DropDownList>
-
-                            <asp:CustomValidator ID="CustomValidator2"
-                                ControlToValidate="DropDownList2"
-                                ClientValidationFunction="ValidaQuant"
-                                ErrorMessage="Preencha os campos!"
-                                CssClass="m-0 p-0"
-                                ForeColor="red"
-                                Font-Size="12px"
-                                runat="server" />
+                            <asp:Label ID="LabelQTDE" runat="server" Text="0"></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:TemplateField HeaderText="Regra de Cálculo" ItemStyle-Width="10%" HeaderStyle-CssClass="GridHeader">
+                    <asp:TemplateField HeaderText="Regra de Cálculo" ItemStyle-Width="7%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:DropDownList ID="DropDownList3" CssClass="browser-default custom-select" runat="server">
-                                <asp:ListItem Text="Selecione..." Value="0" Selected="True" />
-                                <asp:ListItem Text="Único Curso" Value="1" />
-                                <asp:ListItem Text="CH Proporcional" Value="2" />
-                            </asp:DropDownList>
-                            <asp:CustomValidator ID="CustomValidator3"
-                                ControlToValidate="DropDownList3"
-                                ClientValidationFunction="ValidaCalc"
-                                ErrorMessage="Preencha os campos!"
-                                CssClass="m-0 p-0"
-                                ForeColor="red"
-                                Font-Size="12px"
-                                runat="server" />
+                            <asp:Label ID="LabelRegraCalc" runat="server"></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:BoundField DataField="numCC" HeaderText="n° CC" ItemStyle-Width="5%" HeaderStyle-CssClass="GridHeader" />
+                    <asp:TemplateField HeaderText="n° CC" ItemStyle-Width="8%" HeaderStyle-CssClass="GridHeader">
+                        <ItemTemplate>
+                            <asp:TextBox ID="TextBoxCC" runat="server" CssClass="form-control" AutoPostBack="true" OnTextChanged="checkboxVerifica"></asp:TextBox>
+
+                            <asp:RegularExpressionValidator                               
+                                ID="RegularExpressionValidator1"
+                                runat="server" ControlToValidate="TextBoxCC"
+                                ErrorMessage="Somente números!"
+                                CssClass="m-0 p-0"
+                                ForeColor="red"
+                                Font-Size="12px"
+                                ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
+                        </ItemTemplate>
+                    </asp:TemplateField>
 
                     <asp:TemplateField HeaderText="PUB" ItemStyle-Width="1%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:CheckBox ID="CheckBox0" runat="server" />
+                            <asp:CheckBox ID="CheckBox0" runat="server" AutoPostBack="true" OnCheckedChanged="checkboxVerifica" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="DIR" ItemStyle-Width="1%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:CheckBox ID="CheckBox1" runat="server" />
+                            <asp:CheckBox ID="CheckBox1" runat="server" AutoPostBack="true" OnCheckedChanged="checkboxVerifica" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="ADM" ItemStyle-Width="1%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:CheckBox ID="CheckBox2" runat="server" />
+                            <asp:CheckBox ID="CheckBox2" runat="server" AutoPostBack="true" OnCheckedChanged="checkboxVerifica" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="ENF" ItemStyle-Width="1%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:CheckBox ID="CheckBox3" runat="server" />
+                            <asp:CheckBox ID="CheckBox3" runat="server" AutoPostBack="true" OnCheckedChanged="checkboxVerifica" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="FIS" ItemStyle-Width="1%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:CheckBox ID="CheckBox4" runat="server" />
+                            <asp:CheckBox ID="CheckBox4" runat="server" AutoPostBack="true" OnCheckedChanged="checkboxVerifica" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="PSI" ItemStyle-Width="1%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:CheckBox ID="CheckBox5" runat="server" />
+                            <asp:CheckBox ID="CheckBox5" runat="server" AutoPostBack="true" OnCheckedChanged="checkboxVerifica" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="CON" ItemStyle-Width="1%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:CheckBox ID="CheckBox6" runat="server" />
+                            <asp:CheckBox ID="CheckBox6" runat="server" AutoPostBack="true" OnCheckedChanged="checkboxVerifica" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="MED" ItemStyle-Width="1%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:CheckBox ID="CheckBox7" runat="server" />
+                            <asp:CheckBox ID="CheckBox7" runat="server" AutoPostBack="true" OnCheckedChanged="checkboxVerifica" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Pós Graduação" ItemStyle-Width="1%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:CheckBox ID="CheckBox8" runat="server" />
+                            <asp:CheckBox ID="CheckBox8" runat="server" AutoPostBack="true" OnCheckedChanged="checkboxVerifica" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Comitê de Ética" ItemStyle-Width="5%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:CheckBox ID="CheckBox9" runat="server" />
+                            <asp:CheckBox ID="CheckBox9" runat="server" AutoPostBack="true" OnCheckedChanged="checkboxVerifica" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Disciplinas Digitais" ItemStyle-Width="2%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:CheckBox ID="CheckBox10" runat="server" />
+                            <asp:CheckBox ID="CheckBox10" runat="server" AutoPostBack="true" OnCheckedChanged="checkboxVerifica" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Bioenergia Mestrado" ItemStyle-Width="2%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:CheckBox ID="CheckBox11" runat="server" />
+                            <asp:CheckBox ID="CheckBox11" runat="server" AutoPostBack="true" OnCheckedChanged="checkboxVerifica" />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="NQA" ItemStyle-Width="1%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
-                            <asp:CheckBox ID="CheckBox12" runat="server" />
+                            <asp:CheckBox ID="CheckBox12" runat="server" AutoPostBack="true" OnCheckedChanged="checkboxVerifica" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -159,7 +125,7 @@
             <div class="d-flex justify-content-center">
                 <asp:Button CssClass="btn btn-primary" ID="btnEnvia" runat="server" Text="Enviar" OnClick="btnEnvia_Click" />
                 <asp:Button CssClass="btn btn-info ml-5" ID="btnExcel" runat="server" CausesValidation="false" Text="Excel" OnClick="btnExcel_Click" />
-                <asp:Button CssClass="btn btn-info ml-5" ID="btnPDF" runat="server" CausesValidation="false" Text="PDF" OnClick="btnPDF_Click"/>
+                <asp:Button CssClass="btn btn-info ml-5" ID="btnPDF" runat="server" CausesValidation="false" Text="PDF" OnClick="btnPDF_Click" />
             </div>
         </div>
     </form>
@@ -170,31 +136,4 @@
 
 </body>
 </html>
-
-<script language="javascript"> 
-    function ValidaCC(source, arguments) {
-        if (arguments.Value == 0) {
-            arguments.IsValid = false;
-        } else {
-            arguments.IsValid = true;
-        }
-    }
-
-    function ValidaQuant(source, arguments) {
-        if (arguments.Value == 11) {
-            arguments.IsValid = false;
-        } else {
-            arguments.IsValid = true;
-        }
-    }
-
-    function ValidaCalc(source, arguments) {
-        if (arguments.Value == 0) {
-            arguments.IsValid = false;
-        } else {
-            arguments.IsValid = true;
-        }
-    }
-
-</script>
 

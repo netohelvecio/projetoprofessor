@@ -30,14 +30,17 @@ namespace Projeto
             dt.Clear();
             dt.Columns.Add("categoria");
             dt.Columns.Add("numCC");
+            dt.Columns.Add("qtde");
 
             DataRow data = dt.NewRow();
             data["categoria"] = "Agência de publicidade";
             data["numCC"] = 7000;
+            data["qtde"] = 3;
 
             DataRow data2 = dt.NewRow();
             data2["categoria"] = "Clínica de Psicologia";
             data2["numCC"] = 7000;
+            data2["qtde"] = 3;
 
             dt.Rows.Add(data);
             dt.Rows.Add(data2);
@@ -63,85 +66,20 @@ namespace Projeto
                 CheckBox CheckBox11 = (CheckBox)gridView.FindControl("CheckBox11"); //bioenergia
                 CheckBox CheckBox12 = (CheckBox)gridView.FindControl("CheckBox12"); //nqa
 
-                DropDownList dropDownList1 = (DropDownList)gridView.FindControl("dropDownList1"); //cc
-                DropDownList dropDownList2 = (DropDownList)gridView.FindControl("dropDownList2"); //qtde
-                DropDownList dropDownList3 = (DropDownList)gridView.FindControl("dropDownList3"); //regra de calc
+                Label labelQTDE = (Label)gridView.FindControl("LabelQTDE");
+                Label LabelRegraCalc = (Label)gridView.FindControl("LabelRegraCalc");
+                Label LabelCC = (Label)gridView.FindControl("LabelCC");
 
-                int cc;
-                int qtde;
-                int regraCal;
+                TextBox TextBoxCC = (TextBox)gridView.FindControl("TextBoxCC");
 
-                //coluna dropdown CC
-                if (Convert.ToInt32(dropDownList1.SelectedValue) == 1)
-                {
-                    cc = 1; //nao
-                }
-                else if (Convert.ToInt32(dropDownList1.SelectedValue) == 2)
-                {
-                    cc = 2; //sim
-                }
-                else
-                {
-                    cc = 0; // nao selecionado
-                }
-
-                //coluna dropdown qtde
-                switch (Convert.ToInt32(dropDownList2.SelectedValue))
-                {
-                    case 0:
-                        qtde = 0;
-                        break;
-                    case 1:
-                        qtde = 1;
-                        break;
-                    case 2:
-                        qtde = 2;
-                        break;
-                    case 3:
-                        qtde = 3;
-                        break;
-                    case 4:
-                        qtde = 4;
-                        break;
-                    case 5:
-                        qtde = 5;
-                        break;
-                    case 6:
-                        qtde = 6;
-                        break;
-                    case 7:
-                        qtde = 7;
-                        break;
-                    case 8:
-                        qtde = 8;
-                        break;
-                    case 9:
-                        qtde = 9;
-                        break;
-                    case 10:
-                        qtde = 10;
-                        break;
-                }
-
-                //coluna dropdown regra de calculo 
-                if (Convert.ToInt32(dropDownList3.SelectedValue) == 1)
-                {
-                    regraCal = 1; //único curso
-                }
-                else if (Convert.ToInt32(dropDownList3.SelectedValue) == 2)
-                {
-                    regraCal = 2; //ch proporcional
-                }
-                else
-                {
-                    regraCal = 0; //nao selecionado
-                }
+                int check = 0;
 
                 //coluna checkbox pub
                 int pub;
                 if (CheckBox0.Checked)
                 {
                     pub = 1; //check
+                    check += 1;
                 }
                 else
                 {
@@ -153,6 +91,7 @@ namespace Projeto
                 if (CheckBox1.Checked)
                 {
                     dir = 1; //check
+                    check += 1;
                 }
                 else
                 {
@@ -164,6 +103,7 @@ namespace Projeto
                 if (CheckBox2.Checked)
                 {
                     adm = 1; //check
+                    check += 1;
                 }
                 else
                 {
@@ -175,6 +115,7 @@ namespace Projeto
                 if (CheckBox3.Checked)
                 {
                     enf = 1; //check
+                    check += 1;
                 }
                 else
                 {
@@ -186,6 +127,7 @@ namespace Projeto
                 if (CheckBox4.Checked)
                 {
                     fis = 1; //check
+                    check += 1;
                 }
                 else
                 {
@@ -197,6 +139,7 @@ namespace Projeto
                 if (CheckBox5.Checked)
                 {
                     psi = 1; //check
+                    check += 1;
                 }
                 else
                 {
@@ -207,7 +150,8 @@ namespace Projeto
                 int con;
                 if (CheckBox6.Checked)
                 {
-                    con = 1; //check   
+                    con = 1; //check
+                    check += 1;
                 }
                 else
                 {
@@ -219,6 +163,7 @@ namespace Projeto
                 if (CheckBox7.Checked)
                 {
                     med = 1; //check
+                    check += 1;
                 }
                 else
                 {
@@ -230,6 +175,7 @@ namespace Projeto
                 if (CheckBox8.Checked)
                 {
                     pos = 1; //check
+                    check += 1;
                 }
                 else
                 {
@@ -241,6 +187,7 @@ namespace Projeto
                 if (CheckBox9.Checked)
                 {
                     comEtica = 1; //check
+                    check += 1;
                 }
                 else
                 {
@@ -252,6 +199,7 @@ namespace Projeto
                 if (CheckBox10.Checked)
                 {
                     disDigitais = 1; //check
+                    check += 1;
                 }
                 else
                 {
@@ -263,6 +211,7 @@ namespace Projeto
                 if (CheckBox11.Checked)
                 {
                     bio = 1; //check
+                    check += 1;
                 }
                 else
                 {
@@ -274,20 +223,44 @@ namespace Projeto
                 if (CheckBox12.Checked)
                 {
                     nqa = 1; //check
+                    check += 1;
                 }
                 else
                 {
                     nqa = 0; //nao check
                 }
-            }
 
-            Panel1.Visible = true;
-            form1.Visible = false;
+                if (check > 1)
+                {
+                    LabelRegraCalc.Text = "CH Proporcional";
+                }
+                else if (check == 0)
+                {
+                    LabelRegraCalc.Text = "";
+                }
+                else
+                {
+                    LabelRegraCalc.Text = "Único Curso";
+                }
+
+                if (TextBoxCC.Text == "")
+                {
+                    LabelCC.Text = "Não";
+                }
+                else
+                {
+                    LabelCC.Text = "Sim";
+                }
+
+                labelQTDE.Text = check.ToString();
+            }
         }
 
         protected void btnEnvia_Click(object sender, EventArgs e)
         {
             capturaDados();
+            Panel1.Visible = true;
+            form1.Visible = false;
         }
 
         public override void VerifyRenderingInServerForm(Control control)
@@ -426,6 +399,11 @@ namespace Projeto
 
             Response.Write(document);
             Response.End();
+        }
+
+        protected void checkboxVerifica(object sender, EventArgs e)
+        {
+            capturaDados();
         }
     }
 }
