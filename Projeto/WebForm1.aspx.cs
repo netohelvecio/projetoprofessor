@@ -376,6 +376,14 @@ namespace Projeto
                 {
                     GridView1.Rows[row.DataItemIndex].Cells[17].Text = "X";
                 }
+
+                Label LabelCC2 = (Label)row.FindControl("LabelCC2");
+                TextBox TextBoxCC = (TextBox)row.FindControl("TextBoxCC");
+                if(TextBoxCC.Text != "")
+                {
+                    LabelCC2.Visible = true;
+                    LabelCC2.Text = TextBoxCC.Text;
+                }
             }
 
             for (int i = 0; i <= 17; i++)
@@ -388,12 +396,22 @@ namespace Projeto
 
             StringReader sr = new StringReader(sw.ToString());
             Document document = new Document(new RectangleReadOnly(900, 600), 30f, 30f, 10f, 10f);
-            document.SetMargins(5, 5, 10, 10);
+            document.SetMargins(5, 5, 30, 10);
             document.AddCreationDate();
             HTMLWorker htmlparser = new HTMLWorker(document);
             PdfWriter.GetInstance(document, Response.OutputStream);
 
+            Font fonteTitulo = FontFactory.GetFont("Verdana", 28, iTextSharp.text.Font.BOLD);
+            fonteTitulo.SetColor(0, 0, 0);
+            Chunk titulo = new Chunk("Rateio", fonteTitulo);
+            Phrase frase = new Phrase(titulo);
+            Paragraph p = new Paragraph();
+            p.Alignment = 1;
+            p.SpacingAfter = 20;
+
             document.Open();
+            p.Add(frase);
+            document.Add(p);
             htmlparser.Parse(sr);
             document.Close();
 

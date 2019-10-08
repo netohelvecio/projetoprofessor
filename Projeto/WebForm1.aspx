@@ -42,7 +42,7 @@
                     <asp:TemplateField HeaderText="n° CC" ItemStyle-Width="8%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
                             <asp:TextBox ID="TextBoxCC" runat="server" CssClass="form-control" AutoPostBack="true" OnTextChanged="checkboxVerifica"></asp:TextBox>
-
+                            <asp:Label ID="LabelCC2" runat="server" Visible="false"></asp:Label>
                             <asp:RegularExpressionValidator                               
                                 ID="RegularExpressionValidator1"
                                 runat="server" ControlToValidate="TextBoxCC"
