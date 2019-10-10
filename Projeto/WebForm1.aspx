@@ -47,6 +47,7 @@
                                 ID="RegularExpressionValidator1"
                                 runat="server" ControlToValidate="TextBoxCC"
                                 ErrorMessage="Somente números!"
+                                Visible="false"
                                 CssClass="m-0 p-0"
                                 ForeColor="red"
                                 Font-Size="12px"

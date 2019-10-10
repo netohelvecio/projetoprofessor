@@ -25,19 +25,20 @@ namespace Projeto
         }
 
         private DataTable getDados_()
-        {          
+        {
+            String[] categoria = { "Agência de publicidade", "Clínica de Psicologia", "Assessoria Pedagógica" };
+            int[] cc = { 9000, 8985, 2000 };
             DataTable dt = new DataTable();
             dt.Clear();
             dt.Columns.Add("categoria");
+            dt.Columns.Add("cc");
 
-            DataRow data = dt.NewRow();
-            data["categoria"] = "Agência de publicidade";
-
-            DataRow data2 = dt.NewRow();
-            data2["categoria"] = "Clínica de Psicologia";
-
-            dt.Rows.Add(data);
-            dt.Rows.Add(data2);
+            foreach (var i in categoria)
+            {
+                DataRow dataRow = dt.NewRow();
+                dataRow["categoria"] = i;
+                dt.Rows.Add(dataRow);
+            }
 
             return dt;
         }
@@ -266,7 +267,7 @@ namespace Projeto
         {
             Response.Clear();
             Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment;filename=Tabela.xls");
+            Response.AddHeader("content-disposition", "attachment;filename=Rateio.xls");
             Response.ContentEncoding = System.Text.Encoding.GetEncoding("Windows-1252");
             Response.Charset = "ISO-8859-1";
             Response.ContentType = "application/vnd.ms-excel";
@@ -425,7 +426,7 @@ namespace Projeto
             //necessario instalar biblioteca iTextSharp
 
             Response.ContentType = "application/pdf";
-            Response.AddHeader("content-disposition", "attachment;filename=Tabela.pdf");
+            Response.AddHeader("content-disposition", "attachment;filename=Rateio.pdf");
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
 
             StringWriter sw = new StringWriter();
