@@ -25,22 +25,16 @@ namespace Projeto
         }
 
         private DataTable getDados_()
-        {
+        {          
             DataTable dt = new DataTable();
             dt.Clear();
             dt.Columns.Add("categoria");
-            dt.Columns.Add("numCC");
-            dt.Columns.Add("qtde");
 
             DataRow data = dt.NewRow();
             data["categoria"] = "Agência de publicidade";
-            data["numCC"] = 7000;
-            data["qtde"] = 3;
 
             DataRow data2 = dt.NewRow();
             data2["categoria"] = "Clínica de Psicologia";
-            data2["numCC"] = 7000;
-            data2["qtde"] = 3;
 
             dt.Rows.Add(data);
             dt.Rows.Add(data2);
@@ -277,18 +271,152 @@ namespace Projeto
             Response.Charset = "ISO-8859-1";
             Response.ContentType = "application/vnd.ms-excel";
 
-            using (StringWriter sw = new StringWriter())
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+            this.getDados_();
+
+            foreach (GridViewRow row in GridView1.Rows)
             {
-                HtmlTextWriter hw = new HtmlTextWriter(sw);
+                int i = row.DataItemIndex;
+                CheckBox CheckBox0 = (CheckBox)row.FindControl("CheckBox0"); //pub
+                if (CheckBox0.Checked)
+                {
+                    GridView1.Rows[i].Cells[5].Text = "x";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[5].Text = "";
+                }
+                CheckBox CheckBox1 = (CheckBox)row.FindControl("CheckBox1"); //pub
+                if (CheckBox1.Checked)
+                {
+                    GridView1.Rows[i].Cells[6].Text = "x";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[6].Text = "";
+                }
+                CheckBox CheckBox2 = (CheckBox)row.FindControl("CheckBox2"); //pub
+                if (CheckBox2.Checked)
+                {
+                    GridView1.Rows[i].Cells[7].Text = "x";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[7].Text = "";
+                }
+                CheckBox CheckBox3 = (CheckBox)row.FindControl("CheckBox3"); //pub
+                if (CheckBox3.Checked)
+                {
+                    GridView1.Rows[i].Cells[8].Text = "x";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[8].Text = "";
+                }
+                CheckBox CheckBox4 = (CheckBox)row.FindControl("CheckBox4"); //pub
+                if (CheckBox4.Checked)
+                {
+                    GridView1.Rows[i].Cells[9].Text = "x";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[9].Text = "";
+                }
+                CheckBox CheckBox5 = (CheckBox)row.FindControl("CheckBox5"); //pub
+                if (CheckBox5.Checked)
+                {
+                    GridView1.Rows[i].Cells[10].Text = "x";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[10].Text = "";
+                }
+                CheckBox CheckBox6 = (CheckBox)row.FindControl("CheckBox6"); //pub
+                if (CheckBox6.Checked)
+                {
+                    GridView1.Rows[i].Cells[11].Text = "x";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[11].Text = "";
+                }
+                CheckBox CheckBox7 = (CheckBox)row.FindControl("CheckBox7"); //pub
+                if (CheckBox7.Checked)
+                {
+                    GridView1.Rows[i].Cells[12].Text = "x";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[12].Text = "";
+                }
+                CheckBox CheckBox8 = (CheckBox)row.FindControl("CheckBox8"); //pub
+                if (CheckBox8.Checked)
+                {
+                    GridView1.Rows[i].Cells[13].Text = "x";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[13].Text = "";
+                }
+                CheckBox CheckBox9 = (CheckBox)row.FindControl("CheckBox9"); //pub
+                if (CheckBox9.Checked)
+                {
+                    GridView1.Rows[i].Cells[14].Text = "x";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[14].Text = "";
+                }
+                CheckBox CheckBox10 = (CheckBox)row.FindControl("CheckBox10"); //pub
+                if (CheckBox10.Checked)
+                {
+                    GridView1.Rows[i].Cells[15].Text = "x";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[15].Text = "";
+                }
+                CheckBox CheckBox11 = (CheckBox)row.FindControl("CheckBox11"); //pub
+                if (CheckBox11.Checked)
+                {
+                    GridView1.Rows[i].Cells[16].Text = "x";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[16].Text = "";
+                }
+                CheckBox CheckBox12 = (CheckBox)row.FindControl("CheckBox12"); //pub
+                if (CheckBox12.Checked)
+                {
+                    GridView1.Rows[i].Cells[17].Text = "x";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[17].Text = "";
+                }
 
-                GridView1.AllowPaging = false;
-                this.getDados_();
+                TextBox TextBoxCC = (TextBox)row.FindControl("TextBoxCC");
+                if (TextBoxCC.Text == "")
+                {
+                    GridView1.Rows[i].Cells[4].Text = "S/N";
+                }
+                else
+                {
+                    GridView1.Rows[i].Cells[4].Text = TextBoxCC.Text;
+                }
 
-                GridView1.RenderControl(hw);
-                Response.Output.Write(sw.ToString());
-                Response.Flush();
-                Response.End();
+                Label LabelRegraCalc = (Label)row.FindControl("LabelRegraCalc");
+                if (LabelRegraCalc.Text == "")
+                {
+                    LabelRegraCalc.Text = "Nenhum";
+                }
             }
+
+            GridView1.RenderControl(hw);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
         }
 
         [Obsolete]
@@ -303,9 +431,9 @@ namespace Projeto
             StringWriter sw = new StringWriter();
             HtmlTextWriter hw = new HtmlTextWriter(sw);
             GridView1.AllowPaging = false;
-            GridView1.HeaderRow.Style.Add("width", "5%");
-            GridView1.HeaderRow.Style.Add("font-size", "8px");
-            GridView1.Style.Add("font-size", "8px");
+            GridView1.HeaderRow.Style.Add("width", "10%");
+            GridView1.HeaderRow.Style.Add("font-size", "10px");
+            GridView1.Style.Add("font-size", "10px");
             GridView1.HeaderRow.Style.Add("text-align", "center");
 
             foreach (GridViewRow row in GridView1.Rows)
@@ -314,75 +442,86 @@ namespace Projeto
                 CheckBox CheckBox0 = (CheckBox)row.FindControl("CheckBox0"); //pub
                 if (CheckBox0.Checked)
                 {
-                    GridView1.Rows[row.DataItemIndex].Cells[5].Text = "X";
+                    GridView1.Rows[i].Cells[5].Text = "X";
                 }
                 CheckBox CheckBox1 = (CheckBox)row.FindControl("CheckBox1"); //pub
                 if (CheckBox1.Checked)
                 {
-                    GridView1.Rows[row.DataItemIndex].Cells[6].Text = "X";
+                    GridView1.Rows[i].Cells[6].Text = "X";
                 }
                 CheckBox CheckBox2 = (CheckBox)row.FindControl("CheckBox2"); //pub
                 if (CheckBox2.Checked)
                 {
-                    GridView1.Rows[row.DataItemIndex].Cells[7].Text = "X";
+                    GridView1.Rows[i].Cells[7].Text = "X";
                 }
                 CheckBox CheckBox3 = (CheckBox)row.FindControl("CheckBox3"); //pub
                 if (CheckBox3.Checked)
                 {
-                    GridView1.Rows[row.DataItemIndex].Cells[8].Text = "X";
+                    GridView1.Rows[i].Cells[8].Text = "X";
                 }
                 CheckBox CheckBox4 = (CheckBox)row.FindControl("CheckBox4"); //pub
                 if (CheckBox4.Checked)
                 {
-                    GridView1.Rows[row.DataItemIndex].Cells[9].Text = "X";
+                    GridView1.Rows[i].Cells[9].Text = "X";
                 }
                 CheckBox CheckBox5 = (CheckBox)row.FindControl("CheckBox5"); //pub
                 if (CheckBox5.Checked)
                 {
-                    GridView1.Rows[row.DataItemIndex].Cells[10].Text = "X";
+                    GridView1.Rows[i].Cells[10].Text = "X";
                 }
                 CheckBox CheckBox6 = (CheckBox)row.FindControl("CheckBox6"); //pub
                 if (CheckBox6.Checked)
                 {
-                    GridView1.Rows[row.DataItemIndex].Cells[11].Text = "X";
+                    GridView1.Rows[i].Cells[11].Text = "X";
                 }
                 CheckBox CheckBox7 = (CheckBox)row.FindControl("CheckBox7"); //pub
                 if (CheckBox7.Checked)
                 {
-                    GridView1.Rows[row.DataItemIndex].Cells[12].Text = "X";
+                    GridView1.Rows[i].Cells[12].Text = "X";
                 }
                 CheckBox CheckBox8 = (CheckBox)row.FindControl("CheckBox8"); //pub
                 if (CheckBox8.Checked)
                 {
-                    GridView1.Rows[row.DataItemIndex].Cells[13].Text = "X";
+                    GridView1.Rows[i].Cells[13].Text = "X";
                 }
                 CheckBox CheckBox9 = (CheckBox)row.FindControl("CheckBox9"); //pub
                 if (CheckBox9.Checked)
                 {
-                    GridView1.Rows[row.DataItemIndex].Cells[14].Text = "X";
+                    GridView1.Rows[i].Cells[14].Text = "X";
                 }
                 CheckBox CheckBox10 = (CheckBox)row.FindControl("CheckBox10"); //pub
                 if (CheckBox10.Checked)
                 {
-                    GridView1.Rows[row.DataItemIndex].Cells[15].Text = "X";
+                    GridView1.Rows[i].Cells[15].Text = "X";
                 }
                 CheckBox CheckBox11 = (CheckBox)row.FindControl("CheckBox11"); //pub
                 if (CheckBox11.Checked)
                 {
-                    GridView1.Rows[row.DataItemIndex].Cells[16].Text = "X";
+                    GridView1.Rows[i].Cells[16].Text = "X";
                 }
                 CheckBox CheckBox12 = (CheckBox)row.FindControl("CheckBox12"); //pub
                 if (CheckBox12.Checked)
                 {
-                    GridView1.Rows[row.DataItemIndex].Cells[17].Text = "X";
+                    GridView1.Rows[i].Cells[17].Text = "X";
+                }
+
+                Label LabelRegraCalc = (Label)row.FindControl("LabelRegraCalc");
+                if (LabelRegraCalc.Text == "")
+                {
+                    LabelRegraCalc.Text = "Nenhum";
                 }
 
                 Label LabelCC2 = (Label)row.FindControl("LabelCC2");
                 TextBox TextBoxCC = (TextBox)row.FindControl("TextBoxCC");
-                if(TextBoxCC.Text != "")
+                if (TextBoxCC.Text != "")
                 {
                     LabelCC2.Visible = true;
                     LabelCC2.Text = TextBoxCC.Text;
+                }
+                else
+                {
+                    LabelCC2.Visible = true;
+                    LabelCC2.Text = "S/N";
                 }
             }
 
@@ -395,7 +534,7 @@ namespace Projeto
             GridView1.RenderControl(hw);
 
             StringReader sr = new StringReader(sw.ToString());
-            Document document = new Document(new RectangleReadOnly(900, 600), 30f, 30f, 10f, 10f);
+            Document document = new Document(new RectangleReadOnly(1200, 600), 30f, 30f, 10f, 10f);
             document.SetMargins(5, 5, 30, 10);
             document.AddCreationDate();
             HTMLWorker htmlparser = new HTMLWorker(document);

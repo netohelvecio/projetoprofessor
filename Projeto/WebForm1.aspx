@@ -15,7 +15,7 @@
 <body>
     <form id="form1" runat="server">
         <div class="mt-3">
-            <asp:GridView ID="GridView1" runat="server" CssClass="table table-bordered table-active font-size" AutoGenerateColumns="False" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Bottom">
+            <asp:GridView ID="GridView1" runat="server" CssClass="table table-bordered" AutoGenerateColumns="False" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Bottom">
                 <Columns>
 
                     <asp:BoundField DataField="categoria" HeaderText="Categoria" ItemStyle-Width="8%" HeaderStyle-CssClass="GridHeader" />
@@ -33,17 +33,17 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:TemplateField HeaderText="Regra de Cálculo" ItemStyle-Width="7%" HeaderStyle-CssClass="GridHeader">
+                    <asp:TemplateField HeaderText="Regra de Cálculo" ItemStyle-Width="5%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
                             <asp:Label ID="LabelRegraCalc" runat="server"></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:TemplateField HeaderText="n° CC" ItemStyle-Width="8%" HeaderStyle-CssClass="GridHeader">
+                    <asp:TemplateField HeaderText="n° CC" ItemStyle-Width="4%" HeaderStyle-CssClass="GridHeader">
                         <ItemTemplate>
                             <asp:TextBox ID="TextBoxCC" runat="server" CssClass="form-control" AutoPostBack="true" OnTextChanged="checkboxVerifica"></asp:TextBox>
                             <asp:Label ID="LabelCC2" runat="server" Visible="false"></asp:Label>
-                            <asp:RegularExpressionValidator                               
+                            <asp:RegularExpressionValidator
                                 ID="RegularExpressionValidator1"
                                 runat="server" ControlToValidate="TextBoxCC"
                                 ErrorMessage="Somente números!"
@@ -123,9 +123,9 @@
             </asp:GridView>
 
             <div class="d-flex justify-content-center">
-                <asp:Button CssClass="btn btn-primary" ID="btnEnvia" runat="server" Text="Enviar" OnClick="btnEnvia_Click" />
-                <asp:Button CssClass="btn btn-info ml-5" ID="btnExcel" runat="server" CausesValidation="false" Text="Excel" OnClick="btnExcel_Click" />
-                <asp:Button CssClass="btn btn-info ml-5" ID="btnPDF" runat="server" CausesValidation="false" Text="PDF" OnClick="btnPDF_Click" />
+                <asp:Button CssClass="btn" ID="btnEnvia" runat="server" Text="Enviar" OnClick="btnEnvia_Click" />
+                <asp:Button CssClass="btn ml-5" ID="btnExcel" runat="server" CausesValidation="false" Text="Excel" OnClick="btnExcel_Click" />
+                <asp:Button CssClass="btn ml-5" ID="btnPDF" runat="server" CausesValidation="false" Text="PDF" OnClick="btnPDF_Click" />
             </div>
         </div>
     </form>

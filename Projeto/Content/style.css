@@ -1,4 +1,6 @@
-﻿.borda {
+﻿@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+
+.borda {
     border-style: solid;
     border-width: 1px;
 }
@@ -8,8 +10,45 @@
     vertical-align: middle !important;
 }
 
-.font-size {
-    font-size: 12px;
+td, th, input[type=submit] {
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+input[type=submit] {
+    width: 150px;
+}
+
+input[type=text] {
+    width: 100px;
+    height: 30px;
+}
+
+input#btnExcel, input#btnPDF {
+    background-color: #2890F3;
+    color: white;
+}
+
+input#btnEnvia {
+    background-color: #106975;
+    color: white;
+}
+
+input#btnExcel:hover, input#btnPDF:hover {
+    background-color: #0D82F2;
+    color: white;
+}
+
+input#btnEnvia:hover {
+    background-color: #0D545E;
+    color: white;
+}
+
+td {
+    font-size: 14px;
+}
+
+th {
+    font-size: 13px;
 }
 
 .table td, .table th {
@@ -30,7 +69,7 @@ input[type=checkbox] {
 }
 
 table tr:hover {
-    background-color: #D9DCDC;
+    background-color: #F4F5F5;
 }
 
 @media screen and (min-width: 1000px) and (max-width: 1300px) {
@@ -41,15 +80,38 @@ table tr:hover {
 
     .GridHeader {
         text-align: center !important;
-        vertical-align: central !important;
+        vertical-align: middle !important;
     }
 
-    .font-size {
-        font-size: 12px;
+    td, th, input[type=submit] {
+        font-family: "Roboto", Arial, Helvetica, sans-serif;
     }
 
-    table#GridView1 {
-        width: 1400px;
+    input[type=submit] {
+        width: 150px;
+    }
+
+    input[type=text] {
+        width: 100px;
+        height: 30px;
+    }
+
+    input#btnExcel, input#btnPDF {
+        background-color: #2890F3;
+        color: white;
+    }
+
+        input#btnExcel:hover, input#btnPDF:hover {
+            background-color: #0B71D3;
+            color: white;
+        }
+
+    td {
+        font-size: 14px;
+    }
+
+    th {
+        font-size: 13px;
     }
 
     .table td, .table th {
@@ -70,6 +132,10 @@ table tr:hover {
     }
 
     table tr:hover {
-        background-color: #D9DCDC;
+        background-color: #F4F5F5;
+    }
+
+    table#GridView1 {
+        width: 1400px;
     }
 }
